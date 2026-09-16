@@ -1,0 +1,55 @@
+# Datos: microdatos INEE
+
+## Fuente y cobertura confirmada
+
+Ficheros del INEE para PISA 2022 España: `PISA2022_Estudiantes_Esp.sav`
+(30.800 alumnos) y `PISA2022_CentrosEducativos_Esp.sav` (966 colegios). A
+diferencia de `learningtower` (usado en el proyecto internacional, con
+columnas recortadas respecto al fichero oficial), este fichero nacional
+trae el esquema completo: los 10 valores plausibles por dominio (no 1),
+origen inmigrante (`IMMIG`), y sobre todo **`REGION`**, con 19 valores
+correspondientes a las 17 comunidades autónomas más Ceuta y Melilla --
+justo el nivel jerárquico que motivó abrir este proyecto aparte.
+
+## Un aviso sobre HISCED, para que no se repita el error en otras ediciones
+
+Al validar el fichero de 2022 antes de dar el script por bueno, comprobé
+que `HISCED` va de 1 a 10 (con "menos que ISCED1" e "ISCED1" como
+categorías separadas), mientras que el codebook de PISA 2025 que
+documentamos en el proyecto internacional iba de 1 a 9. Si hubiera
+reutilizado sin comprobar el corte que usé para 2025, el código 10
+(doctorado) se habría quedado como missing para en torno al 11% de la
+muestra. La lección para cuando añadamos más ediciones: revalidar siempre
+las variables categóricas contra el fichero real, no asumir que el esquema
+es idéntico solo porque el nombre de columna coincide.
+
+## Tamaños de muestra por CCAA
+
+La mayoría de comunidades tienen entre 1.400 y 3.250 alumnos en 2022; Ceuta
+(345) y Melilla (259) son bastante más pequeñas por su tamaño poblacional.
+Cualquier estimación específica de esas dos ciudades autónomas tendrá un
+intervalo de credibilidad notablemente más ancho -- conviene señalarlo
+explícitamente en los resultados, no solo dejar que se vea en el gráfico.
+
+## Tipo de colegio (público/privado)
+
+El fichero de centros (`PISA2022_CentrosEducativos_Esp.sav`) trae
+`PRIVATESCH` (derivada del marco muestral, completa en 2022: 603 públicos /
+363 privados) y `SC013Q01TA` (autodeclarada, con algo de missing). Una
+sorpresa más al validar: `PRIVATESCH` viene como texto
+(`"public"`/`"private"`) en este fichero, no numérica como en el codebook
+de PISA 2025 -- se normalizó con una función que admite ambos formatos. Es
+una covariable de nivel colegio (no de alumno), así que se incorpora al
+modelo de efectos principales, no a los estratos MAIHDA.
+
+## Validación cruzada del diseño muestral
+
+PISA tiene un diseño muestral complejo (estratificación + conglomerados +
+pesos replicados). Los modelos INLA de este proyecto usan `stu_wgt` como
+peso de frecuencia simple -- una aproximación razonable pero no
+metodológicamente completa. El paquete `intsvy` [@caro2017intsvy] está
+pensado específicamente para el diseño muestral de PISA/TIMSS/PIRLS (con
+pesos replicados BRR-Fay); una vez tengamos resultados de INLA, merece la
+pena validar al menos un modelo simple con `intsvy` para confirmar que las
+estimaciones puntuales no se alejan mucho -- los intervalos sí pueden
+diferir algo, y eso es precisamente lo que hay que documentar.

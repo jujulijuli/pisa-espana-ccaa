@@ -1,0 +1,36 @@
+# Introducción
+
+Este proyecto nace de una limitación concreta del proyecto internacional
+[`pisa-maihda-trends`](../pisa-maihda-trends): el fichero público de la OCDE
+no distingue comunidad autónoma para España (confirmado contra el codebook
+oficial de PISA 2025 -- la variable `SUBNATIO` existe y da desglose regional
+para varios países, pero para España solo aparece el código de país
+completo). Desde 2015, sin embargo, todas las comunidades autónomas
+participan en PISA con muestra ampliada, estadísticamente representativa a
+nivel regional [@magisnet2023territorial] -- lo que sugiere que, aunque no
+esté en el fichero internacional, esa información sí debería existir en
+algún fichero nacional gestionado por el INEE.
+
+Este proyecto usa esos microdatos (una vez confirmemos su estructura real,
+ver `README.md`) para hacer, por fin, un análisis con comunidad autónoma
+como nivel jerárquico genuino -- no como una aproximación o un dato de
+contexto agregado.
+
+## Preguntas específicas de este proyecto
+
+- ¿Cuánta varianza del resultado académico se explica por la comunidad
+  autónoma, y cómo se compara con la varianza explicada por los estratos
+  interseccionales (género × educación parental × nivel socioeconómico ×
+  origen migrante)? ¿Pesa más la desigualdad territorial o la social?
+- ¿Qué comunidades autónomas muestran una tendencia temporal clara (positiva
+  o negativa), con qué certeza, frente a aquellas donde el intervalo de
+  credibilidad no permite afirmar nada?
+- ¿La desigualdad interseccional (MAIHDA) se distribuye igual en todas las
+  comunidades, o hay diferencias regionales en cómo se cruzan género,
+  origen socioeconómico, educación parental y origen migrante?
+
+El origen migrante entra como cuarta dimensión del estrato interseccional
+porque los microdatos del INEE la traen sin coste adicional en las cuatro
+ediciones -- a diferencia del proyecto internacional, donde esa variable
+solo está disponible de forma directa en 2025 (ver `qmd/03-metodos.qmd`
+para el detalle de esta diferencia deliberada entre los dos proyectos).

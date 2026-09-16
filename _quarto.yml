@@ -1,0 +1,41 @@
+project:
+  type: book
+  output-dir: _output
+
+book:
+  title: "Rendimiento educativo en España en PISA por comunidad autónoma"
+  date: today
+  chapters:
+    - index.qmd
+    - qmd/01-introduccion.qmd
+    - qmd/02-datos-inee.qmd
+    - qmd/03-metodos.qmd
+    - qmd/04-resultados.qmd
+    - qmd/05-descriptivo-heterogeneidad.qmd
+
+# `freeze: false` (antes `auto`): con `freeze: auto` cada render copiaba los
+# resultados de ejecución a `_freeze/` -- ese paso choca de forma repetida
+# con ficheros `._*` (metadatos AppleDouble que macOS crea en discos
+# externos/red no nativos, como este volumen) y produce el error
+# "NotADirectory... ._execute-results". Con `freeze: false` se evita ese
+# paso por completo; `cache: true` (caché de knitr por chunk, algo
+# independiente del freezer) se mantiene, así que los renders repetidos
+# sin cambios en el código siguen siendo rápidos.
+execute:
+  freeze: false
+  cache: true
+
+bibliography: references.bib
+
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+    code-fold: true
+    code-tools: true
+    fig-width: 8
+    fig-height: 5
+
+lang: es

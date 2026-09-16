@@ -1,0 +1,57 @@
+# Métodos
+
+Mismo enfoque que en `pisa-maihda-trends` (modelo multivariante conjunto de
+los 3 dominios, MAIHDA interseccional, INLA bayesiano) pero con la
+comunidad autónoma sustituyendo al país como nivel jerárquico superior. Ver
+`R/03_model_maihda_ccaa_inla.R` (VPC/PCV por edición, con CCAA como nivel
+real) y `R/04_model_trend_ccaa_inla.R` (tendencia pooled con pendiente
+aleatoria por CCAA).
+
+**Composición del estrato interseccional -- asimetría deliberada entre los
+dos proyectos.** Aquí el estrato se define como género × educación
+parental × cuartil de ESCS × origen migrante (nativo / 1ª generación / 2ª
+generación; 72 estratos posibles, ver `R/02_prepare_variables.R`),
+mientras que en `pisa-maihda-trends` el estrato omite el origen migrante
+(24 estratos). No es una inconsistencia entre proyectos sino una decisión
+ligada a la disponibilidad de datos: en el fichero internacional de la
+OCDE (vía `learningtower`) el origen migrante solo viene incluido de forma
+directa en la edición 2025, y reconstruirlo para 2000-2022 exigiría un
+trabajo de fusión con ficheros nacionales por país y edición
+desproporcionado para los fines de un análisis de tendencia de 9
+ediciones. En los microdatos del INEE usados aquí, en cambio, el origen
+migrante está disponible sin coste adicional en las cuatro ediciones, así
+que se incluye como cuarta dimensión del estrato -- coherente con el uso
+estándar en la literatura MAIHDA de incorporar todas las dimensiones
+interseccionales relevantes que los datos permitan.
+
+Los efectos aleatorios de **estrato** y de **colegio** son trivariantes
+correlacionados (`model = "iid3d"` en INLA, uno por dominio: lectura, mates,
+ciencia), no un único efecto compartido entre los tres -- así un estrato o
+un colegio puede puntuar alto en una materia y bajo en otra, y el modelo
+estima explícitamente la correlación entre dominios en vez de forzarla a
+ser perfecta. De aquí salen VPC y PCV por dominio (en vez de un único
+número) y una cantidad nueva: la correlación entre dominios a nivel de
+estrato y de colegio. El nivel CCAA se mantiene como efecto `iid` simple.
+Ver el comentario largo en `../pisa-maihda-trends/R/03_model_maihda_inla.R`
+para el detalle técnico de cómo se construye el índice trivariante y el
+aviso sobre robustez de los nombres de hiperparámetros en INLA.
+
+> **Nota temporal (2026-09-14)**: mientras se prueba una configuración más
+> rápida del ajuste (miles de colegios por edición hacían el modelo muy
+> lento, ver `R/03_model_maihda_ccaa_inla.R`), el efecto de **colegio** está
+> puesto temporalmente como `iid` simple, igual que CCAA -- solo
+> **estrato** conserva la estructura trivariante descrita arriba mientras
+> se comprueba si esto resuelve la lentitud.
+
+La comparación entre el VPC del estrato interseccional y el VPC de la CCAA
+(mismo modelo, misma escala, calculados por separado) es la pieza central
+de este proyecto: permite decir, con intervalo de credibilidad, si en un
+momento dado pesa más la desigualdad social dentro de una comunidad que la
+desigualdad entre comunidades -- una pregunta que el debate político sobre
+"ranking de comunidades autónomas" casi nunca formula así.
+
+**Actualizado (2026-09-14)**: `R/04_model_trend_ccaa_inla.R` (el modelo
+pooled de tendencia) también tiene ahora el efecto de **estrato** como
+trivariante (`iid3d`), no solo el modelo MAIHDA por edición -- mismo motivo
+y misma decisión de dejar colegio como `iid` simple ahí (ver el comentario
+equivalente en `../pisa-maihda-trends/qmd/04-metodos-tendencia-bayesiana.qmd`).

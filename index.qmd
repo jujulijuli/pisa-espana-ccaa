@@ -1,0 +1,41 @@
+---
+title: "Rendimiento educativo en España en PISA: jerarquía territorial, desigualdad social y factores explicativos de la caída reciente"
+date: today
+lang: es
+---
+
+## Resumen
+
+Este informe analiza el rendimiento educativo de España en PISA a partir
+de los microdatos del INEE, que --a diferencia del fichero internacional
+de la OCDE-- permiten identificar la comunidad autónoma de cada
+estudiante. Esto hace posible tratar la jerarquía "alumno < colegio <
+comunidad autónoma" como un nivel real de la estructura de datos, en lugar
+de aproximarlo con el país de residencia.
+
+La primera parte del informe (capítulos 1 a 4) aplica un modelo MAIHDA
+(Multilevel Analysis of Individual Heterogeneity and Discriminatory
+Accuracy) para descomponer cuánta variación en el rendimiento se explica
+por la posición social interseccional del alumnado (género, educación
+parental, nivel socioeconómico y origen migrante) frente a cuánta se
+explica por la comunidad autónoma, con series temporales por estrato y
+por territorio.
+
+La segunda parte (capítulo 5) es un análisis descriptivo específico sobre
+dos posibles explicaciones de la caída observada en la edición más
+reciente: el aumento de la heterogeneidad del aula --en particular la
+segregación escolar del alumnado de origen migrante-- y la presencia de
+distractores digitales (pantallas, redes sociales) en el aula. Combina
+series históricas 2009-2022, un modelo de asociación transversal para la
+edición más reciente y un modelo mixto con covariables de nivel colegio
+para valorar cuánta varianza entre colegios explica cada mecanismo.
+
+## Estructura
+
+1. Introducción
+2. Datos: microdatos INEE
+3. Métodos
+4. Resultados del modelo jerárquico MAIHDA
+5. Descriptivo: heterogeneidad, segregación y distractores digitales
+
+## Referencias

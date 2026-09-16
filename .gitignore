@@ -1,0 +1,6 @@
+data/
+_output/
+_freeze/
+.Rproj.user/
+.quarto/
+*.rds
