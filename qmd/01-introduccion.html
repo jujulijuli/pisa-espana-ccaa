@@ -239,7 +239,22 @@ div.csl-indent {
 </header>
 
 
-<p>Este proyecto nace de una limitación concreta del proyecto internacional <a href="../pisa-maihda-trends"><code>pisa-maihda-trends</code></a>: el fichero público de la OCDE no distingue comunidad autónoma para España (confirmado contra el codebook oficial de PISA 2025 – la variable <code>SUBNATIO</code> existe y da desglose regional para varios países, pero para España solo aparece el código de país completo). Desde 2015, sin embargo, todas las comunidades autónomas participan en PISA con muestra ampliada, estadísticamente representativa a nivel regional <span class="citation" data-cites="magisnet2023territorial">(<a href="#ref-magisnet2023territorial" role="doc-biblioref"><em>PISA 2022 y la cuestión territorial en España</em> 2023</a>)</span> – lo que sugiere que, aunque no esté en el fichero internacional, esa información sí debería existir en algún fichero nacional gestionado por el INEE.</p>
+<p>Este proyecto nace de una limitación concreta del proyecto internacional <a href="../pisa-maihda-trends"><code>pisa-maihda-trends</code></a>: para las ocho ediciones de 2000 a 2022, el fichero público de la OCDE no distingue comunidad autónoma para España – la variable <code>SUBNATIO</code> existe y da desglose regional para varios países, pero para España solo aparece el código de país completo.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Corrección (2026-09-21): sí hay desglose por CCAA en el fichero internacional de 2025
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Al revisar el codebook de PISA 2025 apareció una variable distinta, <code>REGION</code>, que sí da el desglose completo de las 17 comunidades autónomas más Ceuta y Melilla (confirmado contra las etiquetas oficiales de la OCDE). <code>SUBNATIO</code> seguía sin distinguir CCAA – la comprobación anterior no estaba mal, solo incompleta: faltaba mirar <code>REGION</code>.</p>
+<p>Esto no sustituye el propósito de este proyecto: <code>REGION</code> solo existe en la edición de 2025, así que no permite construir una tendencia temporal como la que este proyecto obtiene de los microdatos del INEE (2009-2022). Donde sí puede servir es como fuente externa de validación para 2025 – comparando las estimaciones de varianza por CCAA de este proyecto (basadas en microdatos del INEE) con las que salen del fichero internacional de la OCDE para ese mismo año. Ver <code>pisa-maihda-trends/R/06_incorporate_pisa2025.R</code> para el detalle de la variable.</p>
+</div>
+</div>
+<p>Desde 2015, además, todas las comunidades autónomas participan en PISA con muestra ampliada, estadísticamente representativa a nivel regional <span class="citation" data-cites="magisnet2023territorial">(<a href="#ref-magisnet2023territorial" role="doc-biblioref"><em>PISA 2022 y la cuestión territorial en España</em> 2023</a>)</span> – lo que sugiere que, aunque no estuviera en el fichero internacional para esas ediciones anteriores a 2025, esa información sí debería existir en algún fichero nacional gestionado por el INEE.</p>
 <p>Este proyecto usa esos microdatos (una vez confirmemos su estructura real, ver <code>README.md</code>) para hacer, por fin, un análisis con comunidad autónoma como nivel jerárquico genuino – no como una aproximación o un dato de contexto agregado.</p>
 <section id="preguntas-específicas-de-este-proyecto" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="preguntas-específicas-de-este-proyecto"><span class="header-section-number">2.1</span> Preguntas específicas de este proyecto</h2>
@@ -727,39 +742,60 @@ div.csl-indent {
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introducción</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Este proyecto nace de una limitación concreta del proyecto internacional</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">`pisa-maihda-trends`</span><span class="co">](../pisa-maihda-trends)</span>: el fichero público de la OCDE</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>no distingue comunidad autónoma para España (confirmado contra el codebook</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>oficial de PISA 2025 -- la variable <span class="in">`SUBNATIO`</span> existe y da desglose regional</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>para varios países, pero para España solo aparece el código de país</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>completo). Desde 2015, sin embargo, todas las comunidades autónomas</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>participan en PISA con muestra ampliada, estadísticamente representativa a</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>nivel regional <span class="co">[</span><span class="ot">@magisnet2023territorial</span><span class="co">]</span> -- lo que sugiere que, aunque no</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>esté en el fichero internacional, esa información sí debería existir en</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>algún fichero nacional gestionado por el INEE.</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>Este proyecto usa esos microdatos (una vez confirmemos su estructura real,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>ver <span class="in">`README.md`</span>) para hacer, por fin, un análisis con comunidad autónoma</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>como nivel jerárquico genuino -- no como una aproximación o un dato de</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>contexto agregado.</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Preguntas específicas de este proyecto</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Cuánta varianza del resultado académico se explica por la comunidad</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  autónoma, y cómo se compara con la varianza explicada por los estratos</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  interseccionales (género × educación parental × nivel socioeconómico ×</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  origen migrante)? ¿Pesa más la desigualdad territorial o la social?</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Qué comunidades autónomas muestran una tendencia temporal clara (positiva</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  o negativa), con qué certeza, frente a aquellas donde el intervalo de</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  credibilidad no permite afirmar nada?</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿La desigualdad interseccional (MAIHDA) se distribuye igual en todas las</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  comunidades, o hay diferencias regionales en cómo se cruzan género,</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  origen socioeconómico, educación parental y origen migrante?</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>El origen migrante entra como cuarta dimensión del estrato interseccional</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>porque los microdatos del INEE la traen sin coste adicional en las cuatro</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>ediciones -- a diferencia del proyecto internacional, donde esa variable</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>solo está disponible de forma directa en 2025 (ver <span class="in">`qmd/03-metodos.qmd`</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>para el detalle de esta diferencia deliberada entre los dos proyectos).</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">`pisa-maihda-trends`</span><span class="co">](../pisa-maihda-trends)</span>: para las ocho ediciones de</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>2000 a 2022, el fichero público de la OCDE no distingue comunidad autónoma</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>para España -- la variable <span class="in">`SUBNATIO`</span> existe y da desglose regional para</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>varios países, pero para España solo aparece el código de país completo.</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Corrección (2026-09-21): sí hay desglose por CCAA en el fichero internacional de 2025</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>Al revisar el codebook de PISA 2025 apareció una variable distinta,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">`REGION`</span>, que sí da el desglose completo de las 17 comunidades autónomas</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>más Ceuta y Melilla (confirmado contra las etiquetas oficiales de la</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>OCDE). <span class="in">`SUBNATIO`</span> seguía sin distinguir CCAA -- la comprobación anterior</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>no estaba mal, solo incompleta: faltaba mirar <span class="in">`REGION`</span>.</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>Esto no sustituye el propósito de este proyecto: <span class="in">`REGION`</span> solo existe en</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>la edición de 2025, así que no permite construir una tendencia temporal</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>como la que este proyecto obtiene de los microdatos del INEE (2009-2022).</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>Donde sí puede servir es como fuente externa de validación para 2025 --</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>comparando las estimaciones de varianza por CCAA de este proyecto (basadas</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>en microdatos del INEE) con las que salen del fichero internacional de la</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>OCDE para ese mismo año. Ver <span class="in">`pisa-maihda-trends/R/06_incorporate_pisa2025.R`</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>para el detalle de la variable.</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>Desde 2015, además, todas las comunidades autónomas participan en PISA con</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>muestra ampliada, estadísticamente representativa a nivel regional</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">@magisnet2023territorial</span><span class="co">]</span> -- lo que sugiere que, aunque no estuviera en</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>el fichero internacional para esas ediciones anteriores a 2025, esa</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>información sí debería existir en algún fichero nacional gestionado por el</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>INEE.</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>Este proyecto usa esos microdatos (una vez confirmemos su estructura real,</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>ver <span class="in">`README.md`</span>) para hacer, por fin, un análisis con comunidad autónoma</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>como nivel jerárquico genuino -- no como una aproximación o un dato de</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>contexto agregado.</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Preguntas específicas de este proyecto</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Cuánta varianza del resultado académico se explica por la comunidad</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  autónoma, y cómo se compara con la varianza explicada por los estratos</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  interseccionales (género × educación parental × nivel socioeconómico ×</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  origen migrante)? ¿Pesa más la desigualdad territorial o la social?</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Qué comunidades autónomas muestran una tendencia temporal clara (positiva</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  o negativa), con qué certeza, frente a aquellas donde el intervalo de</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>  credibilidad no permite afirmar nada?</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿La desigualdad interseccional (MAIHDA) se distribuye igual en todas las</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  comunidades, o hay diferencias regionales en cómo se cruzan género,</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  origen socioeconómico, educación parental y origen migrante?</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>El origen migrante entra como cuarta dimensión del estrato interseccional</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>porque los microdatos del INEE la traen sin coste adicional en las cuatro</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>ediciones -- a diferencia del proyecto internacional, donde esa variable</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>solo está disponible de forma directa en 2025 (ver <span class="in">`qmd/03-metodos.qmd`</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>para el detalle de esta diferencia deliberada entre los dos proyectos).</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

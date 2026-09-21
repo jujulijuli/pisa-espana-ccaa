@@ -189,8 +189,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#una-fuente-distinta-al-resto-de-la-serie" id="toc-una-fuente-distinta-al-resto-de-la-serie" class="nav-link active" data-scroll-target="#una-fuente-distinta-al-resto-de-la-serie"><span class="header-section-number">4.1</span> 2025: una fuente distinta al resto de la serie</a></li>
+  <li><a href="#potencia-y-precisión-qué-se-puede-afirmar-con-estos-datos-y-qué-no" id="toc-potencia-y-precisión-qué-se-puede-afirmar-con-estos-datos-y-qué-no" class="nav-link" data-scroll-target="#potencia-y-precisión-qué-se-puede-afirmar-con-estos-datos-y-qué-no"><span class="header-section-number">4.2</span> Potencia y precisión: qué se puede afirmar con estos datos y qué no</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -222,10 +229,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p>La comparación entre el VPC del estrato interseccional y el VPC de la CCAA (mismo modelo, misma escala, calculados por separado) es la pieza central de este proyecto: permite decir, con intervalo de credibilidad, si en un momento dado pesa más la desigualdad social dentro de una comunidad que la desigualdad entre comunidades – una pregunta que el debate político sobre “ranking de comunidades autónomas” casi nunca formula así.</p>
 <p><strong>Actualizado (2026-09-14)</strong>: <code>R/04_model_trend_ccaa_inla.R</code> (el modelo pooled de tendencia) también tiene ahora el efecto de <strong>estrato</strong> como trivariante (<code>iid3d</code>), no solo el modelo MAIHDA por edición – mismo motivo y misma decisión de dejar colegio como <code>iid</code> simple ahí (ver el comentario equivalente en <code>../pisa-maihda-trends/qmd/04-metodos-tendencia-bayesiana.qmd</code>).</p>
+<section id="una-fuente-distinta-al-resto-de-la-serie" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="una-fuente-distinta-al-resto-de-la-serie"><span class="header-section-number">4.1</span> 2025: una fuente distinta al resto de la serie</h2>
+<p>Las ediciones 2009, 2012, 2015 y 2022 vienen de microdatos nacionales gestionados por el INEE. <strong>2025 es una excepción</strong>: el INEE remite directamente al fichero internacional de la OCDE (no hay microdatos nacionales separados publicados para esta edición), así que 2025 se incorpora desde ahí (<code>R/01d_incorporate_pisa2025_ccaa.R</code>), filtrando a España y usando la variable <code>REGION</code> – distinta de <code>SUBNATIO</code>, que para España no da ningún desglose (ver <code>../pisa-maihda-trends/R/06_incorporate_pisa2025.R</code>, que documenta el mismo hallazgo para el proyecto internacional).</p>
+<p>Dos precisiones importantes sobre esta edición:</p>
+<ul>
+<li>Los <strong>códigos</strong> de <code>REGION</code> en el fichero internacional NO coinciden con los del fichero nacional de 2022 (mismo nombre de variable, mapeo distinto) – <code>R/01d_incorporate_pisa2025_ccaa.R</code> usa su propia tabla de equivalencia, verificada contra las etiquetas de valor reales del fichero.</li>
+<li>Ceuta y Melilla aparecen <strong>separadas</strong> en 2025 (como en 2022), a diferencia de 2009 (combinadas) y 2012 (ausentes). Esto les da, por primera vez, dos ediciones con datos (2022 y 2025) – suficiente para que <code>05_communicate_uncertainty.R</code> las incluya en el forest plot de tendencias, aunque con un intervalo de credibilidad necesariamente muy ancho al basarse en solo dos puntos.</li>
+</ul>
+<p>En lo demás (dominios, valores plausibles, pesos, IMMIG) el esquema de columnas de 2025 es el mismo que el resto de la serie reciente – ver el detalle verificado columna a columna en <code>R/01d_incorporate_pisa2025_ccaa.R</code>.</p>
+</section>
+<section id="potencia-y-precisión-qué-se-puede-afirmar-con-estos-datos-y-qué-no" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="potencia-y-precisión-qué-se-puede-afirmar-con-estos-datos-y-qué-no"><span class="header-section-number">4.2</span> Potencia y precisión: qué se puede afirmar con estos datos y qué no</h2>
+<p>Antes de leer cualquier cifra de 2025 (una caída de puntuación, una comunidad autónoma por encima o por debajo de otra) conviene tener presente el tamaño de muestra que hay detrás. Como en el resto de la serie, el tamaño muestral por CCAA no es uniforme: la mayoría de comunidades rondan 1.400-3.250 alumnos por edición, pero Ceuta y Melilla son bastante más pequeñas (unos pocos cientos), lo que se traduce directamente en intervalos de credibilidad más anchos para ellas en cualquier resultado, incluida la comparación 2022-2025. La regla general que sigue este informe es no afirmar una diferencia (entre comunidades, o entre ediciones) a menos que su intervalo de credibilidad no cruce el cero – las diferencias con intervalos que sí lo cruzan se muestran igual, pero explícitamente marcadas como no concluyentes, nunca como ausencia de diferencia.</p>
 
 
 <!-- -->
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -747,7 +768,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>pooled de tendencia) también tiene ahora el efecto de **estrato** como</span>
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>trivariante (<span class="in">`iid3d`</span>), no solo el modelo MAIHDA por edición -- mismo motivo</span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>y misma decisión de dejar colegio como <span class="in">`iid`</span> simple ahí (ver el comentario</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>equivalente en <span class="in">`../pisa-maihda-trends/qmd/04-metodos-tendencia-bayesiana.qmd`</span>).</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>equivalente en <span class="in">`../pisa-maihda-trends/qmd/04-metodos-tendencia-bayesiana.qmd`</span>).</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2025: una fuente distinta al resto de la serie</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>Las ediciones 2009, 2012, 2015 y 2022 vienen de microdatos nacionales</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>gestionados por el INEE. **2025 es una excepción**: el INEE remite</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>directamente al fichero internacional de la OCDE (no hay microdatos</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>nacionales separados publicados para esta edición), así que 2025 se</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>incorpora desde ahí (<span class="in">`R/01d_incorporate_pisa2025_ccaa.R`</span>), filtrando a</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>España y usando la variable <span class="in">`REGION`</span> -- distinta de <span class="in">`SUBNATIO`</span>, que para</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>España no da ningún desglose (ver <span class="in">`../pisa-maihda-trends/R/06_incorporate_pisa2025.R`</span>,</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>que documenta el mismo hallazgo para el proyecto internacional).</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>Dos precisiones importantes sobre esta edición:</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Los **códigos** de <span class="in">`REGION`</span> en el fichero internacional NO coinciden con</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>  los del fichero nacional de 2022 (mismo nombre de variable, mapeo</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>  distinto) -- <span class="in">`R/01d_incorporate_pisa2025_ccaa.R`</span> usa su propia tabla de</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>  equivalencia, verificada contra las etiquetas de valor reales del</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>  fichero.</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ceuta y Melilla aparecen **separadas** en 2025 (como en 2022), a</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>  diferencia de 2009 (combinadas) y 2012 (ausentes). Esto les da, por</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>  primera vez, dos ediciones con datos (2022 y 2025) -- suficiente para</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>  que <span class="in">`05_communicate_uncertainty.R`</span> las incluya en el forest plot de</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>  tendencias, aunque con un intervalo de credibilidad necesariamente muy</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>  ancho al basarse en solo dos puntos.</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>En lo demás (dominios, valores plausibles, pesos, IMMIG) el esquema de</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>columnas de 2025 es el mismo que el resto de la serie reciente -- ver el</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>detalle verificado columna a columna en <span class="in">`R/01d_incorporate_pisa2025_ccaa.R`</span>.</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="fu">## Potencia y precisión: qué se puede afirmar con estos datos y qué no</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>Antes de leer cualquier cifra de 2025 (una caída de puntuación, una</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>comunidad autónoma por encima o por debajo de otra) conviene tener</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>presente el tamaño de muestra que hay detrás. Como en el resto de la</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>serie, el tamaño muestral por CCAA no es uniforme: la mayoría de</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>comunidades rondan 1.400-3.250 alumnos por edición, pero Ceuta y Melilla</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>son bastante más pequeñas (unos pocos cientos), lo que se traduce</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>directamente en intervalos de credibilidad más anchos para ellas en</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>cualquier resultado, incluida la comparación 2022-2025. La regla general</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>que sigue este informe es no afirmar una diferencia (entre comunidades, o</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>entre ediciones) a menos que su intervalo de credibilidad no cruce el</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>cero -- las diferencias con intervalos que sí lo cruzan se muestran igual,</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>pero explícitamente marcadas como no concluyentes, nunca como ausencia de</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>diferencia.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
