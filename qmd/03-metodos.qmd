@@ -55,3 +55,48 @@ pooled de tendencia) también tiene ahora el efecto de **estrato** como
 trivariante (`iid3d`), no solo el modelo MAIHDA por edición -- mismo motivo
 y misma decisión de dejar colegio como `iid` simple ahí (ver el comentario
 equivalente en `../pisa-maihda-trends/qmd/04-metodos-tendencia-bayesiana.qmd`).
+
+## 2025: una fuente distinta al resto de la serie
+
+Las ediciones 2009, 2012, 2015 y 2022 vienen de microdatos nacionales
+gestionados por el INEE. **2025 es una excepción**: el INEE remite
+directamente al fichero internacional de la OCDE (no hay microdatos
+nacionales separados publicados para esta edición), así que 2025 se
+incorpora desde ahí (`R/01d_incorporate_pisa2025_ccaa.R`), filtrando a
+España y usando la variable `REGION` -- distinta de `SUBNATIO`, que para
+España no da ningún desglose (ver `../pisa-maihda-trends/R/06_incorporate_pisa2025.R`,
+que documenta el mismo hallazgo para el proyecto internacional).
+
+Dos precisiones importantes sobre esta edición:
+
+- Los **códigos** de `REGION` en el fichero internacional NO coinciden con
+  los del fichero nacional de 2022 (mismo nombre de variable, mapeo
+  distinto) -- `R/01d_incorporate_pisa2025_ccaa.R` usa su propia tabla de
+  equivalencia, verificada contra las etiquetas de valor reales del
+  fichero.
+- Ceuta y Melilla aparecen **separadas** en 2025 (como en 2022), a
+  diferencia de 2009 (combinadas) y 2012 (ausentes). Esto les da, por
+  primera vez, dos ediciones con datos (2022 y 2025) -- suficiente para
+  que `05_communicate_uncertainty.R` las incluya en el forest plot de
+  tendencias, aunque con un intervalo de credibilidad necesariamente muy
+  ancho al basarse en solo dos puntos.
+
+En lo demás (dominios, valores plausibles, pesos, IMMIG) el esquema de
+columnas de 2025 es el mismo que el resto de la serie reciente -- ver el
+detalle verificado columna a columna en `R/01d_incorporate_pisa2025_ccaa.R`.
+
+## Potencia y precisión: qué se puede afirmar con estos datos y qué no
+
+Antes de leer cualquier cifra de 2025 (una caída de puntuación, una
+comunidad autónoma por encima o por debajo de otra) conviene tener
+presente el tamaño de muestra que hay detrás. Como en el resto de la
+serie, el tamaño muestral por CCAA no es uniforme: la mayoría de
+comunidades rondan 1.400-3.250 alumnos por edición, pero Ceuta y Melilla
+son bastante más pequeñas (unos pocos cientos), lo que se traduce
+directamente en intervalos de credibilidad más anchos para ellas en
+cualquier resultado, incluida la comparación 2022-2025. La regla general
+que sigue este informe es no afirmar una diferencia (entre comunidades, o
+entre ediciones) a menos que su intervalo de credibilidad no cruce el
+cero -- las diferencias con intervalos que sí lo cruzan se muestran igual,
+pero explícitamente marcadas como no concluyentes, nunca como ausencia de
+diferencia.

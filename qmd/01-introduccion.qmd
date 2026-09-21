@@ -1,15 +1,36 @@
 # Introducción
 
 Este proyecto nace de una limitación concreta del proyecto internacional
-[`pisa-maihda-trends`](../pisa-maihda-trends): el fichero público de la OCDE
-no distingue comunidad autónoma para España (confirmado contra el codebook
-oficial de PISA 2025 -- la variable `SUBNATIO` existe y da desglose regional
-para varios países, pero para España solo aparece el código de país
-completo). Desde 2015, sin embargo, todas las comunidades autónomas
-participan en PISA con muestra ampliada, estadísticamente representativa a
-nivel regional [@magisnet2023territorial] -- lo que sugiere que, aunque no
-esté en el fichero internacional, esa información sí debería existir en
-algún fichero nacional gestionado por el INEE.
+[`pisa-maihda-trends`](../pisa-maihda-trends): para las ocho ediciones de
+2000 a 2022, el fichero público de la OCDE no distingue comunidad autónoma
+para España -- la variable `SUBNATIO` existe y da desglose regional para
+varios países, pero para España solo aparece el código de país completo.
+
+::: {.callout-note}
+## Corrección (2026-09-21): sí hay desglose por CCAA en el fichero internacional de 2025
+
+Al revisar el codebook de PISA 2025 apareció una variable distinta,
+`REGION`, que sí da el desglose completo de las 17 comunidades autónomas
+más Ceuta y Melilla (confirmado contra las etiquetas oficiales de la
+OCDE). `SUBNATIO` seguía sin distinguir CCAA -- la comprobación anterior
+no estaba mal, solo incompleta: faltaba mirar `REGION`.
+
+Esto no sustituye el propósito de este proyecto: `REGION` solo existe en
+la edición de 2025, así que no permite construir una tendencia temporal
+como la que este proyecto obtiene de los microdatos del INEE (2009-2022).
+Donde sí puede servir es como fuente externa de validación para 2025 --
+comparando las estimaciones de varianza por CCAA de este proyecto (basadas
+en microdatos del INEE) con las que salen del fichero internacional de la
+OCDE para ese mismo año. Ver `pisa-maihda-trends/R/06_incorporate_pisa2025.R`
+para el detalle de la variable.
+:::
+
+Desde 2015, además, todas las comunidades autónomas participan en PISA con
+muestra ampliada, estadísticamente representativa a nivel regional
+[@magisnet2023territorial] -- lo que sugiere que, aunque no estuviera en
+el fichero internacional para esas ediciones anteriores a 2025, esa
+información sí debería existir en algún fichero nacional gestionado por el
+INEE.
 
 Este proyecto usa esos microdatos (una vez confirmemos su estructura real,
 ver `README.md`) para hacer, por fin, un análisis con comunidad autónoma
