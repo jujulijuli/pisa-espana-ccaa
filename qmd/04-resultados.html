@@ -254,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
-<p>El estrato interseccional y el colegio son efectos trivariantes correlacionados (uno por dominio, ver <code>qmd/03-metodos.qmd</code>), así que el VPC y el PCV del estrato son por dominio; la CCAA se mantiene univariante. Como referencia, en matemáticas y en 2025, el VPC del estrato interseccional (género × educación parental × ESCS × origen inmigrante) es <strong>8.3%</strong> (IC 95%: 6.5% – 10.7%), frente a <strong>3.7%</strong> (1.8% – 8.0%) explicado por la comunidad autónoma – es decir, en 2025 el estrato interseccional explica 2.2 veces más varianza que la comunidad autónoma (los intervalos de credibilidad de ambos niveles se solapan en el extremo, así que esta razón puntual conviene leerla con cautela, no como una diferencia tajante). El PCV del estrato en ese mismo dominio y edición es <strong>24.2%</strong> (-22.2% – 56.6%) – un valor negativo, que se explica en la nota tras la Figura 2. La tabla de abajo da los tres dominios completos.</p>
+<p>El estrato interseccional y el colegio son efectos trivariantes correlacionados (uno por dominio, ver <code>qmd/03-metodos.qmd</code>), así que el VPC y el PCV del estrato son por dominio; la CCAA se mantiene univariante. Como referencia, en matemáticas y en 2025, el VPC del estrato interseccional (género × educación parental × estatus laboral × origen inmigrante) es <strong>8.3%</strong> (IC 95%: 6.5% – 10.7%), frente a <strong>3.7%</strong> (1.8% – 8.0%) explicado por la comunidad autónoma – es decir, en 2025 el estrato interseccional explica 2.2 veces más varianza que la comunidad autónoma (los intervalos de credibilidad de ambos niveles se solapan en el extremo, así que esta razón puntual conviene leerla con cautela, no como una diferencia tajante). El PCV del estrato en ese mismo dominio y edición es <strong>24.2%</strong> (-22.2% – 56.6%) – un valor negativo, que se explica en la nota tras la Figura 2. La tabla de abajo da los tres dominios completos.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-vpc-compare" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -294,7 +294,7 @@ Figura&nbsp;5.2: PCV del estrato interseccional por edición y dominio
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>En 2025, el PCV del estrato en matemáticas es <strong>24.2%</strong> (IC 95%: -22.2% a 56.6%) – positivo, a diferencia de 2022 (ver Tabla 1 más abajo para la serie completa). Sumar por separado el efecto de género, educación parental, ESCS y origen migrante recupera aquí buena parte de la varianza entre grupos: la combinación concreta de esos cuatro rasgos (la interacción propiamente interseccional, más allá de la suma de sus partes) aporta relativamente poco por encima de esa suma en esta edición. El intervalo de credibilidad sigue siendo ancho, así que esta lectura es indicativa, no definitiva. Nótese que el PCV puede salir negativo en otras ediciones (ocurrió en 2022) por una razón técnica específica del modelo, no por un cambio real en el fenómeno – ver el detalle en el desplegable siguiente.</p>
+<p>En 2025, el PCV del estrato en matemáticas es <strong>24.2%</strong> (IC 95%: -22.2% a 56.6%) – positivo, a diferencia de 2022 (ver Tabla 1 más abajo para la serie completa). Sumar por separado el efecto de género, educación parental, estatus laboral y origen migrante recupera aquí buena parte de la varianza entre grupos: la combinación concreta de esos cuatro rasgos (la interacción propiamente interseccional, más allá de la suma de sus partes) aporta relativamente poco por encima de esa suma en esta edición. El intervalo de credibilidad sigue siendo ancho, así que esta lectura es indicativa, no definitiva. Nótese que el PCV puede salir negativo en otras ediciones (ocurrió en 2022) por una razón técnica específica del modelo, no por un cambio real en el fenómeno – ver el detalle en el desplegable siguiente.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1381,7 +1381,7 @@ Tabla&nbsp;5.2: VPC de la comunidad autónoma por edición, con IC 95%
 </figure>
 </div>
 </div>
-<p><strong>Qué mirar aquí</strong>: si el VPC de la CCAA es sistemáticamente menor que el del estrato interseccional (en cualquiera de los tres dominios), la lectura directa es que, en España, importa más <em>quién eres</em> (tu combinación de género, educación parental, ESCS y origen inmigrante) que <em>dónde vives</em> – una conclusión que rara vez aparece así de explícita en el debate sobre “ranking de comunidades autónomas”. Si el VPC de la CCAA aumenta a lo largo de las ediciones mientras el del estrato se mantiene, eso indicaría una desigualdad territorial creciente que merece más atención de la que suele recibir. Nuevo respecto a un modelo univariante: comparar el VPC del estrato <strong>entre dominios</strong> – si la desigualdad social pesa más en mates que en lectura, por ejemplo.</p>
+<p><strong>Qué mirar aquí</strong>: si el VPC de la CCAA es sistemáticamente menor que el del estrato interseccional (en cualquiera de los tres dominios), la lectura directa es que, en España, importa más <em>quién eres</em> (tu combinación de género, educación parental, estatus laboral y origen inmigrante) que <em>dónde vives</em> – una conclusión que rara vez aparece así de explícita en el debate sobre “ranking de comunidades autónomas”. Si el VPC de la CCAA aumenta a lo largo de las ediciones mientras el del estrato se mantiene, eso indicaría una desigualdad territorial creciente que merece más atención de la que suele recibir. Nuevo respecto a un modelo univariante: comparar el VPC del estrato <strong>entre dominios</strong> – si la desigualdad social pesa más en mates que en lectura, por ejemplo.</p>
 </section>
 <section id="un-estrato-o-un-colegio-desigual-en-un-dominio-lo-es-también-en-los-otros" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="un-estrato-o-un-colegio-desigual-en-un-dominio-lo-es-también-en-los-otros"><span class="header-section-number">5.2</span> 2. ¿Un estrato o un colegio desigual en un dominio lo es también en los otros?</h2>
@@ -4177,7 +4177,7 @@ Figura&nbsp;5.7: Brecha ajustada por origen inmigrante, con IC 95%
 </div>
 </div>
 </div>
-<p><strong>Qué mirar aquí</strong>: ambas brechas ya están ajustadas por estrato interseccional (que en este proyecto ya incluye origen inmigrante como dimensión) y por la jerarquía colegio/CCAA – así que la brecha de origen inmigrante que se muestra aquí es la que persiste una vez tenida en cuenta su interacción con género, educación parental y ESCS, no el efecto bruto sin ajustar. Comparar esta cifra con la posición de los estratos con alumnado inmigrante en <a href="#fig-strata-forest" class="quarto-xref">Figura&nbsp;<span>5.4</span></a> ayuda a distinguir cuánta de la brecha bruta observada es composicional (viene de otras variables correlacionadas) frente a lo que persiste tras el ajuste.</p>
+<p><strong>Qué mirar aquí</strong>: ambas brechas ya están ajustadas por estrato interseccional (que en este proyecto ya incluye origen inmigrante como dimensión) y por la jerarquía colegio/CCAA – así que la brecha de origen inmigrante que se muestra aquí es la que persiste una vez tenida en cuenta su interacción con género, educación parental y estatus laboral, no el efecto bruto sin ajustar. Comparar esta cifra con la posición de los estratos con alumnado inmigrante en <a href="#fig-strata-forest" class="quarto-xref">Figura&nbsp;<span>5.4</span></a> ayuda a distinguir cuánta de la brecha bruta observada es composicional (viene de otras variables correlacionadas) frente a lo que persiste tras el ajuste.</p>
 </section>
 <section id="discusión-qué-añade-la-mirada-territorial" class="level2" data-number="5.6">
 <h2 data-number="5.6" class="anchored" data-anchor-id="discusión-qué-añade-la-mirada-territorial"><span class="header-section-number">5.6</span> Discusión: qué añade la mirada territorial</h2>
@@ -4793,7 +4793,7 @@ Figura&nbsp;5.7: Brecha ajustada por origen inmigrante, con IC 95%
 <span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>correlacionados (uno por dominio, ver <span class="in">`qmd/03-metodos.qmd`</span>), así que el VPC</span>
 <span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>y el PCV del estrato son por dominio; la CCAA se mantiene univariante. Como</span>
 <span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>referencia, en matemáticas y en <span class="in">`r latest_year`</span>, el VPC del estrato</span>
-<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>interseccional (género × educación parental × ESCS × origen inmigrante) es</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>interseccional (género × educación parental × estatus laboral × origen inmigrante) es</span>
 <span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>**`r scales::percent(latest$vpc_mean, accuracy = 0.1)`**</span>
 <span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>(IC 95%: <span class="in">`r scales::percent(latest$vpc_lower, accuracy = 0.1)`</span> –</span>
 <span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a><span class="in">`r scales::percent(latest$vpc_upper, accuracy = 0.1)`</span>), frente a</span>
@@ -4901,7 +4901,7 @@ Figura&nbsp;5.7: Brecha ajustada por origen inmigrante, con IC 95%
 <span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a><span class="st">En %s, el PCV del estrato en matemáticas es **%s** (IC 95%%: %s a %s) --</span></span>
 <span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a><span class="st">positivo, a diferencia de 2022 (ver Tabla 1 más abajo para la serie</span></span>
 <span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a><span class="st">completa). Sumar por separado el efecto de género, educación parental,</span></span>
-<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a><span class="st">ESCS y origen migrante recupera aquí buena parte de la varianza entre</span></span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a><span class="st">estatus laboral y origen migrante recupera aquí buena parte de la varianza entre</span></span>
 <span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a><span class="st">grupos: la combinación concreta de esos cuatro rasgos (la interacción</span></span>
 <span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a><span class="st">propiamente interseccional, más allá de la suma de sus partes) aporta</span></span>
 <span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a><span class="st">relativamente poco por encima de esa suma en esta edición. El intervalo de</span></span>
@@ -4980,7 +4980,7 @@ Figura&nbsp;5.7: Brecha ajustada por origen inmigrante, con IC 95%
 <span id="cb1-332"><a href="#cb1-332" aria-hidden="true" tabindex="-1"></a>**Qué mirar aquí**: si el VPC de la CCAA es sistemáticamente menor que el</span>
 <span id="cb1-333"><a href="#cb1-333" aria-hidden="true" tabindex="-1"></a>del estrato interseccional (en cualquiera de los tres dominios), la lectura</span>
 <span id="cb1-334"><a href="#cb1-334" aria-hidden="true" tabindex="-1"></a>directa es que, en España, importa más *quién eres* (tu combinación de</span>
-<span id="cb1-335"><a href="#cb1-335" aria-hidden="true" tabindex="-1"></a>género, educación parental, ESCS y origen inmigrante) que *dónde vives* --</span>
+<span id="cb1-335"><a href="#cb1-335" aria-hidden="true" tabindex="-1"></a>género, educación parental, estatus laboral y origen inmigrante) que *dónde vives* --</span>
 <span id="cb1-336"><a href="#cb1-336" aria-hidden="true" tabindex="-1"></a>una conclusión que rara vez aparece así de explícita en el debate sobre</span>
 <span id="cb1-337"><a href="#cb1-337" aria-hidden="true" tabindex="-1"></a>"ranking de comunidades autónomas". Si el VPC de la CCAA aumenta a lo largo</span>
 <span id="cb1-338"><a href="#cb1-338" aria-hidden="true" tabindex="-1"></a>de las ediciones mientras el del estrato se mantiene, eso indicaría una</span>
@@ -5229,7 +5229,7 @@ Figura&nbsp;5.7: Brecha ajustada por origen inmigrante, con IC 95%
 <span id="cb1-599"><a href="#cb1-599" aria-hidden="true" tabindex="-1"></a>interseccional (que en este proyecto ya incluye origen inmigrante como</span>
 <span id="cb1-600"><a href="#cb1-600" aria-hidden="true" tabindex="-1"></a>dimensión) y por la jerarquía colegio/CCAA -- así que la brecha de origen</span>
 <span id="cb1-601"><a href="#cb1-601" aria-hidden="true" tabindex="-1"></a>inmigrante que se muestra aquí es la que persiste una vez tenida en cuenta</span>
-<span id="cb1-602"><a href="#cb1-602" aria-hidden="true" tabindex="-1"></a>su interacción con género, educación parental y ESCS, no el efecto bruto sin</span>
+<span id="cb1-602"><a href="#cb1-602" aria-hidden="true" tabindex="-1"></a>su interacción con género, educación parental y estatus laboral, no el efecto bruto sin</span>
 <span id="cb1-603"><a href="#cb1-603" aria-hidden="true" tabindex="-1"></a>ajustar. Comparar esta cifra con la posición de los estratos con alumnado</span>
 <span id="cb1-604"><a href="#cb1-604" aria-hidden="true" tabindex="-1"></a>inmigrante en @fig-strata-forest ayuda a distinguir cuánta de la brecha</span>
 <span id="cb1-605"><a href="#cb1-605" aria-hidden="true" tabindex="-1"></a>bruta observada es composicional (viene de otras variables correlacionadas)</span>
